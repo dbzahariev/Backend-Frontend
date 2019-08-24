@@ -55,7 +55,7 @@ router.post(
           .json({ errors: [{ msg: 'Invalid Credentials' }] });
       }
 
-      const payload = { user: { id: user.id, name: user.name } };
+      const payload = { user: { id: user.id } };
 
       jwt.sign(
         payload,

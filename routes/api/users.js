@@ -48,13 +48,14 @@ router.post(
       user.password = await bcrypt.hash(password, salt);
       await user.save();
 
-      const payload = { user: { id: user.id, name: user.name } };
+      const payload = { user: { id: user.id } };
       jwt.sign(
         payload,
         config.get('jwtSecret'),
         { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
+          // TODO: Next line Return token. If you not wan to login automate remove next line. BUT return msg!!!
           res.json({ token });
         }
       );

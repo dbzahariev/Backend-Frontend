@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://rame:901210@cluster0-a2upl.mongodb.net/test?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://rame:901210@cluster0-a2upl.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken"
 }

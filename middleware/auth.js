@@ -7,10 +7,12 @@ module.exports = function(req, res, next) {
   // check if not token
   if (!token) {
     return res.status(401).json({
-      errors: {
-        msg:
-          'No token, authorization denied. (Add header with name: x-auth-token)'
-      }
+      errors: [
+        {
+          msg:
+            'No token, authorization denied. (Add header with name: x-auth-token)'
+        }
+      ]
     });
   }
 
@@ -21,6 +23,6 @@ module.exports = function(req, res, next) {
     req.user = decoded.user;
     next();
   } catch (err) {
-    res.status(401).json({ errors: { msg: 'Token is not valid' } });
+    res.status(401).json({ errors: [{ msg: 'Token is not valid' }] });
   }
 };

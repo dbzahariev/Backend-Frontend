@@ -1,7 +1,7 @@
 {
-  "name": "beckend",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "Beckend from video",
+  "description": "Backend from video",
   "main": "server.js",
   "scripts": {
     "start": "node server",
@@ -16,7 +16,7 @@
     "express-validator": "^6.1.1",
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
-    "mongose": "0.0.2-security",
+    "mongoose": "^5.6.10",
     "request": "^2.88.0"
   },
   "devDependencies": {

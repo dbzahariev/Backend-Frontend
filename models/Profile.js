@@ -2,12 +2,13 @@ const mongoose = require('mongoose');
 
 const ProfileSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
-  Birthday: { type: Date, required: true },
+  birthday: { type: Date, required: true },
   location: { type: String },
   company: { type: String },
+  skills: { type: [String] },
   education: [
     {
-      school: { type: String, require: true },
+      school: { type: String },
       from: { type: Date },
       to: { type: Date },
       description: { type: String }

@@ -105,6 +105,9 @@ router.post(
 router.get('/', async (req, res) => {
   try {
     const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+    if (profiles.length === 0) {
+      return res.json({ errors: [{ msg: 'Not have profiles' }] });
+    }
 
     res.json(profiles);
   } catch (err) {
@@ -131,6 +134,28 @@ router.get('/user/:user_id', async (req, res) => {
     if (err.kind == 'ObjectId') {
       return res.status(500).send('Profile not found');
     }
+    res.status(500).send(`Server error with message: ${err.message}`);
+  }
+});
+
+// @route   DELETE api/profile
+// @desc    Delete profile
+// @access  Private
+router.delete('/', auth, async (req, res) => {
+  try {
+    let successMsg = [];
+    let errorMsg = [];
+    // Remove profile
+    const profile = await Profile.findOneAndRemove({ user: req.user.id });
+    if (profile) {
+      successMsg.push({ msg: 'Profile is Deleted' });
+    } else {
+      errorMsg.push({ msg: 'Profile not found' });
+    }
+
+    res.json({ msg: successMsg, errors: errorMsg });
+  } catch (err) {
+    console.error(err.message);
     res.status(500).send(`Server error with message: ${err.message}`);
   }
 });

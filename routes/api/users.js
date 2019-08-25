@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
+const auth = require('../../middleware/auth');
 
 const User = require('../../models/User');
 // @route   GET api/users
@@ -65,5 +66,36 @@ router.post(
     }
   }
 );
+
+// @route   DELETE api/user
+// @desc    Delete user
+// @access  Private
+router.delete('/', auth, async (req, res) => {
+  try {
+    let successMsg = [];
+    let errorMsg = [];
+
+    // Remove profile
+    const profile = await Profile.findOneAndRemove({ user: req.user.id });
+    if (profile) {
+      successMsg.push({ msg: 'Profile is Deleted' });
+    } else {
+      errorMsg.push({ msg: 'Profile not found' });
+    }
+
+    // Remove user
+    const user = await User.findOneAndRemove({ _id: req.user.id });
+    if (user) {
+      successMsg.push({ msg: 'User is Deleted' });
+    } else {
+      errorMsg.push({ msg: 'User not found' });
+    }
+
+    res.json({ msg: successMsg, errors: errorMsg });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(`Server error with message: ${err.message}`);
+  }
+});
 
 module.exports = router;

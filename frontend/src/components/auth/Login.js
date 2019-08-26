@@ -1,8 +1,11 @@
 import React, { Fragment, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { setAlert } from "../../actions/alert";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-const Login = () => {
+const Login = ({ setAlert }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -27,7 +30,7 @@ const Login = () => {
       const res = await axios.post("/api/auth", body, config);
       console.log(res.data);
     } catch (err) {
-      console.error(err.response.data);
+      setAlert(err.response.data.errors[0].msg, "danger");
     }
   };
 
@@ -50,4 +53,11 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.propTypes = {
+  setAlert: PropTypes.func.isRequired
+};
+
+export default connect(
+  null,
+  { setAlert }
+)(Login);

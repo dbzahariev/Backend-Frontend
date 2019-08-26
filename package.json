@@ -4,10 +4,10 @@
   "description": "Backend from video",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
+    "startOld": "node server",
     "server": "nodemon server",
     "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "ramsess",
   "license": "MIT",
@@ -20,7 +20,9 @@
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.10",
-    "request": "^2.88.0"
+    "redux-thunk": "^2.3.0",
+    "request": "^2.88.0",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "concurrently": "^4.1.2",

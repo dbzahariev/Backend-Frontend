@@ -1,26 +1,26 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const gravatar = require('gravatar');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const config = require('config');
-const { check, validationResult } = require('express-validator');
-const auth = require('../../middleware/auth');
+const gravatar = require("gravatar");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const config = require("config");
+const { check, validationResult } = require("express-validator");
+const auth = require("../../middleware/auth");
 
-const User = require('../../models/User');
+const User = require("../../models/User");
 // @route   GET api/users
 // @desc    Register user
 // @access  Public
 router.post(
-  '/',
+  "/",
   [
-    check('name', 'Name is required')
+    check("name", "Name is required")
       .not()
       .isEmpty(),
-    check('email', 'Email is not valid').isEmail(),
+    check("email", "Email is not valid").isEmail(),
     check(
-      'password',
-      'Please enter a password with 6 or more characters'
+      "password",
+      "Please enter a password with 6 or more characters"
     ).isLength({ min: 6 })
   ],
   async (req, res) => {
@@ -36,12 +36,12 @@ router.post(
       if (user) {
         return res
           .status(400)
-          .json({ errors: [{ msg: 'User already exist' }] });
+          .json({ errors: [{ msg: "User already exist" }] });
       }
       const avatar = gravatar.url(email, {
-        s: '200',
-        r: 'pg',
-        d: 'mm'
+        s: "200",
+        r: "pg",
+        d: "mm"
       });
       user = new User({ name, email, avatar, password });
 
@@ -52,7 +52,7 @@ router.post(
       const payload = { user: { id: user.id } };
       jwt.sign(
         payload,
-        config.get('jwtSecret'),
+        config.get("jwtSecret"),
         { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
@@ -70,7 +70,7 @@ router.post(
 // @route   DELETE api/user
 // @desc    Delete user
 // @access  Private
-router.delete('/', auth, async (req, res) => {
+router.delete("/", auth, async (req, res) => {
   try {
     let successMsg = [];
     let errorMsg = [];
@@ -78,17 +78,17 @@ router.delete('/', auth, async (req, res) => {
     // Remove profile
     const profile = await Profile.findOneAndRemove({ user: req.user.id });
     if (profile) {
-      successMsg.push({ msg: 'Profile is Deleted' });
+      successMsg.push({ msg: "Profile is Deleted" });
     } else {
-      errorMsg.push({ msg: 'Profile not found' });
+      errorMsg.push({ msg: "Profile not found" });
     }
 
     // Remove user
     const user = await User.findOneAndRemove({ _id: req.user.id });
     if (user) {
-      successMsg.push({ msg: 'User is Deleted' });
+      successMsg.push({ msg: "User is Deleted" });
     } else {
-      errorMsg.push({ msg: 'User not found' });
+      errorMsg.push({ msg: "User not found" });
     }
 
     res.json({ msg: successMsg, errors: errorMsg });

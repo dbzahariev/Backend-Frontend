@@ -152,7 +152,6 @@ router.delete("/", auth, async (req, res) => {
     } else {
       errorMsg.push({ msg: "Profile not found" });
     }
-
     res.json({ msg: successMsg, errors: errorMsg });
   } catch (err) {
     console.error(err.message);

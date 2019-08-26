@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { setAlert } from "../../actions/alert";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { headersConfig } from "../../config/database";
 
 const Login = ({ setAlert }) => {
   const [formData, setFormData] = useState({
@@ -20,15 +21,12 @@ const Login = ({ setAlert }) => {
     event.preventDefault();
 
     try {
-      const config = {
-        headers: { "Content-Type": "application/json" }
-      };
-
       const newUser = { email, password };
       const body = JSON.stringify(newUser);
 
-      const res = await axios.post("/api/auth", body, config);
+      const res = await axios.post("/api/auth", body, headersConfig);
       console.log(res.data);
+      setAlert("Login successful");
     } catch (err) {
       setAlert(err.response.data.errors[0].msg, "danger");
     }
@@ -36,6 +34,7 @@ const Login = ({ setAlert }) => {
 
   return (
     <Fragment>
+      <h1>Login</h1>
       <form onSubmit={handleSubmit}>
         Email:
         <br />

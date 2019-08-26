@@ -2,9 +2,10 @@ import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { setAlert } from "../../actions/alert";
+import { register as registerAction } from "../../actions/auth";
 import PropTypes from "prop-types";
 
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, registerAction }) => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -20,15 +21,16 @@ const Register = ({ setAlert }) => {
   const handleSubmit = async event => {
     event.preventDefault();
     if (password !== confPassword) {
-      setAlert("Password incorrect", "danger", 0);
+      setAlert("Password incorrect", "danger");
     } else {
-      console.log("SUCCESS");
+      let token = await registerAction(formData);
+      token && console.log(token);
     }
   };
 
   return (
     <Fragment>
-      <p>Register account</p>
+      <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         Username:
         <br />
@@ -37,18 +39,11 @@ const Register = ({ setAlert }) => {
           type="text"
           name="username"
           value={username}
-          required
         />
         <br />
         Email:
         <br />
-        <input
-          onChange={handleChange}
-          type="text"
-          name="email"
-          value={email}
-          required
-        />
+        <input onChange={handleChange} type="text" name="email" value={email} />
         <br />
         Password
         <br />
@@ -57,8 +52,6 @@ const Register = ({ setAlert }) => {
           type="password"
           name="password"
           value={password}
-          minLength={6}
-          required
         />
         <br />
         Repeat password
@@ -68,8 +61,6 @@ const Register = ({ setAlert }) => {
           type="password"
           name="confPassword"
           value={confPassword}
-          minLength={6}
-          required
         />
         <br />
         <br />
@@ -81,10 +72,11 @@ const Register = ({ setAlert }) => {
 };
 
 Register.propTypes = {
-  setAlert: PropTypes.func.isRequired
+  setAlert: PropTypes.func.isRequired,
+  registerAction: PropTypes.func.isRequired
 };
 
 export default connect(
   null,
-  { setAlert }
+  { setAlert, registerAction }
 )(Register);

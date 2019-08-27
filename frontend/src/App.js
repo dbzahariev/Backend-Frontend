@@ -1,15 +1,15 @@
 import React, { Fragment, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Navbar from "./components/layout/Navbar";
-import Lending from "./components/layout/Lending";
-import Register from "./components/auth/Register";
-import Login from "./components/auth/Login";
-import Alert from "./components/layout/Alert";
-import setAuthToken from "./Helpers/setAuthToken";
-import { loadUser } from "./actions/auth";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
+import Alert from "./components/layout/Alert";
+import Lending from "./components/layout/Lending";
+import Login from "./components/auth/Login";
+import Navbar from "./components/layout/Navbar";
 // Redux
 import { Provider } from "react-redux";
+import Register from "./components/auth/Register";
+import { loadUser } from "./actions/auth";
+import setAuthToken from "./Helpers/setAuthToken";
 import store from "./store";
 
 if (localStorage.getItem("token")) {

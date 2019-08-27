@@ -1,8 +1,10 @@
 import {
-  REGISTER_SUCCESS,
+  AUTH_ERROR,
+  LOGIN_FAIL,
+  LOGIN_SUCCESS,
   REGISTER_FAIL,
-  USER_LOADED,
-  AUTH_ERROR
+  REGISTER_SUCCESS,
+  USER_LOADED
 } from "../config/types";
 
 const initialState = {
@@ -14,9 +16,7 @@ const initialState = {
 
 export default function(state = initialState, action) {
   const { type, payload } = action;
-  if (type === "USER_LOADED") {
-    debugger;
-  }
+
   switch (type) {
     case USER_LOADED:
       return {
@@ -27,11 +27,13 @@ export default function(state = initialState, action) {
       };
 
     case REGISTER_SUCCESS:
+    case LOGIN_SUCCESS:
       localStorage.setItem("token", payload.token);
       return { ...state, ...payload, isAuthenticated: true, loading: false };
 
     case REGISTER_FAIL:
     case AUTH_ERROR:
+    case LOGIN_FAIL:
       localStorage.removeItem("token");
       return {
         ...state,

@@ -1,11 +1,12 @@
+import { Link, Redirect } from "react-router-dom";
 import React, { Fragment, useState } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { setAlert } from "../../actions/alert";
-import { register as registerAction } from "../../actions/auth";
-import PropTypes from "prop-types";
 
-const Register = ({ setAlert, registerAction }) => {
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { register as registerAction } from "../../actions/auth";
+import { setAlert } from "../../actions/alert";
+
+const Register = ({ setAlert, registerAction, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -27,6 +28,11 @@ const Register = ({ setAlert, registerAction }) => {
       token && console.log(token);
     }
   };
+
+  //Redirect if Login
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Fragment>
@@ -73,10 +79,15 @@ const Register = ({ setAlert, registerAction }) => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
-  registerAction: PropTypes.func.isRequired
+  registerAction: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
 };
 
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { setAlert, registerAction }
 )(Register);

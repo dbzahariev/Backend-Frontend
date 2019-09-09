@@ -7,6 +7,7 @@ const Users = ({ users, loading }) => {
   if (loading) {
     return <Spinner />;
   }
+
   return (
     <div style={usersStyle}>
       {users.map(user => (

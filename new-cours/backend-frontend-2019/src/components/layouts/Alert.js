@@ -1,7 +1,8 @@
+import AlertContext from "../../context/alert/alertContext";
 import React from "react";
-import PropTypes from "prop-types";
 
-const Alert = ({ alert }) => {
+const Alert = () => {
+  const { alert } = React.useContext(AlertContext);
   return (
     alert !== null && (
       <React.Fragment>
@@ -11,10 +12,6 @@ const Alert = ({ alert }) => {
       </React.Fragment>
     )
   );
-};
-
-Alert.propTypes = {
-  alert: PropTypes.object
 };
 
 export default Alert;

@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import Spinner from "../layouts/Spinner";
+import GithubContext from "../../context/github/githubContext";
 
-const User = ({ getUser, match, user, loading }) => {
+const User = ({ match }) => {
+  const { getUser, user, loading } = React.useContext(GithubContext);
   useEffect(() => {
     getUser(match.params.login);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -27,13 +28,6 @@ const User = ({ getUser, match, user, loading }) => {
       </a>
     </div>
   );
-};
-
-User.propTypes = {
-  getUser: PropTypes.func.isRequired,
-  match: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired
 };
 
 export default User;

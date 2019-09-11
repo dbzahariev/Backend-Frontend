@@ -34,7 +34,7 @@ router.post(
       if (user) {
         return res
           .status(400)
-          .json({ errors: { msg: "Email is already exist" } });
+          .json({ errors: [{ msg: "Email is already exist" }] });
       }
 
       // Create user by schema
@@ -62,7 +62,10 @@ router.post(
         }
       );
     } catch (error) {
-      console.error(error);
+      console.error(error.message);
+      res
+        .status(500)
+        .json({ errors: [{ msg: error.message, type: "Server error" }] });
     }
   }
 );

@@ -11,8 +11,18 @@ const User = require("../models/User");
 // @route       GET api/auth
 // @desk        Get loged user
 // @access      Private
-router.get("/", auth, (req, res) => {
-  res.send("Get loged user");
+router.get("/", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id)
+      .select("-password")
+      .select("-__v");
+    return res.json(user);
+  } catch (error) {
+    console.error(error.message);
+    res
+      .status(500)
+      .json({ errors: [{ msg: error.message, type: "Server error" }] });
+  }
 });
 
 // @route       POST api/auth

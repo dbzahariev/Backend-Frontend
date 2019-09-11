@@ -1,18 +1,10 @@
-// import {
-//   ADD_CONTACT,
-//   CLEAR_CURRENT,
-//   CLEAR_FILTER,
-//   DELETE_CONTACT,
-//   FILTER_CONTACTS,
-//   SET_CURRENT,
-//   UPDATE_CONTACT
-// } from "../types";
-
+import {
+  ADD_CONTACT
+} from "../types";
 import ContactContext from "./contactContext";
 import ContactReducer from "./contactReducer";
 import React from "react";
-
-// import uuid from "uuid";
+import uuid from "uuid";
 
 const ContactStates = props => {
   const initialState = {
@@ -61,12 +53,19 @@ const ContactStates = props => {
       }
     ]
   };
-  const [state] = React.useReducer(ContactReducer, initialState);
+  const [state, dispatch] = React.useReducer(ContactReducer, initialState);
+
+  // Add Contact
+  const addContact = contact => {
+    contact.id = uuid.v4();
+    dispatch({ type: ADD_CONTACT, payload: contact });
+  };
 
   return (
     <ContactContext.Provider
       value={{
-        contacts: state.contacts
+        contacts: state.contacts,
+        addContact
       }}
     >
       {props.children}

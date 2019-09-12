@@ -9,16 +9,15 @@ const ContactFrom = () => {
   const [type, setType] = React.useState("personal");
 
   const onChange = e => {
-    const { name, value } = e.target;
-    if (name === "name") setName(value);
-    if (name === "email") setEmail(value);
-    if (name === "phone") setPhone(value);
-    if (name === "type") setType(value);
-
-    console.log(e);
+    const { id, value } = e.target;
+    if (id === "name") setName(value);
+    else if (id === "email") setEmail(value);
+    else if (id === "phone") setPhone(value);
+    else if (id === "type") setType(value);
+    else console.error(`(ContactFrom) Not available Name of field: ${name}`);
   };
 
-  const onSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
     const contact = { name, email, phone, type };
     contactContext.addContact(contact);
@@ -29,26 +28,26 @@ const ContactFrom = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <React.Fragment>
       <h2 className="text-primary">Add contact</h2>
       <input
         type="text"
         placeholder="Name"
-        name="name"
+        id="name"
         value={name}
         onChange={onChange}
       />
       <input
         type="text"
         placeholder="Email"
-        name="email"
+        id="email"
         value={email}
         onChange={onChange}
       />
       <input
         type="text"
         placeholder="Phone"
-        name="phone"
+        id="phone"
         value={phone}
         onChange={onChange}
       />
@@ -56,7 +55,7 @@ const ContactFrom = () => {
       <input
         type="radio"
         placeholder="Type"
-        name="type"
+        id="type"
         value="personal"
         checked={type === "personal"}
         onChange={onChange}
@@ -65,20 +64,16 @@ const ContactFrom = () => {
       <input
         type="radio"
         placeholder="Type"
-        name="type"
+        id="type"
         value="professional"
         checked={type === "professional"}
         onChange={onChange}
       />{" "}
       Professional
-      <div>
-        <input
-          type="submit"
-          value="Add contact"
-          className="btn btn-primary btn-block"
-        ></input>
-      </div>
-    </form>
+      <button className="btn btn-primary btn-block" onClick={handleSubmit}>
+        Add contact
+      </button>
+    </React.Fragment>
   );
 };
 

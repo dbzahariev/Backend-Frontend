@@ -1,3 +1,4 @@
+import AlertContext from "../../context/alert/alertContext";
 import ContactContext from "../../context/contact/contactContext";
 import React from "react";
 
@@ -5,6 +6,7 @@ const initialContact = { name: "", email: "", phone: "", type: "personal" };
 
 const ContactFrom = () => {
   const contactContext = React.useContext(ContactContext);
+  const alertContext = React.useContext(AlertContext);
   let { current, clearCurrent } = contactContext;
   const [name, setName] = React.useState(initialContact.name);
   const [email, setEmail] = React.useState(initialContact.email);
@@ -33,6 +35,10 @@ const ContactFrom = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (!name) {
+      alertContext.setAlert("Please input the name", "danger");
+      return null;
+    }
     if (!current) contactContext.addContact({ name, email, phone, type });
     else
       contactContext.updateContact({

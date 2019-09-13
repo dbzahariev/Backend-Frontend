@@ -14,6 +14,9 @@ import {
 import AuthContext from "./authContext";
 import AuthReducer from "./authReducer";
 import React from "react";
+import axios from "axios";
+
+const config = { headers: { "Content-Type": "application/json" } };
 
 const AuthStates = props => {
   const initialState = {
@@ -33,12 +36,29 @@ const AuthStates = props => {
   };
 
   // Register User
+  const register = async formData => {
+    try {
+      const res = await axios.post("/api/users", formData, config);
+
+      dispatch({ type: REGISTER_SUCCESS, payload: res.data.token });
+    } catch (err) {
+      dispatch({
+        type: REGISTER_FAIL,
+        payload: err.response.data.errors[0]
+      });
+    }
+  };
 
   // Login User
 
   // Logout
 
   // Clear errors
+  const clearErrors = () => {
+    dispatch({
+      type: CLEAR_ERRORS
+    });
+  };
 
   // Filtered Auth
 
@@ -50,7 +70,9 @@ const AuthStates = props => {
         loading: state.loading,
         error: state.error,
         user: state.user,
-        loadUser
+        loadUser,
+        register,
+        clearErrors
       }}
     >
       {props.children}

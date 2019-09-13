@@ -12,11 +12,14 @@ const { check, validationResult } = require("express-validator");
 router.post(
   "/",
   [
-    check("name", "name is required")
+    check("name", "Name is required")
       .not()
       .isEmpty(),
     check("email", "Invalid Email").isEmail(),
-    check("password", "password must be with min length 6 chars").isLength({
+    check("password", "Password is required")
+      .not()
+      .isEmpty(),
+    check("password", "Password must be with min length 6 chars").isLength({
       min: 6
     })
   ],

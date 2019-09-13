@@ -9,9 +9,8 @@ const Navbar = ({ title, icon }) => {
 
   const authLinks = (
     <React.Fragment>
-      <li>Hello {user && user.name}</li>
       <li>
-        <a href="#!" onClick={() => logout()}>
+        <a href="#!" onClick={logout}>
           <i className="fas fa-sign-out-alt" />
           <span className="hide-sm">Logout</span>
         </a>
@@ -37,6 +36,7 @@ const Navbar = ({ title, icon }) => {
         </h1>
       </Link>
       <ul>
+        {user ? <li>Hello {user && user.name}</li> : null}
         <li>
           <Link to="/">Home</Link>
         </li>

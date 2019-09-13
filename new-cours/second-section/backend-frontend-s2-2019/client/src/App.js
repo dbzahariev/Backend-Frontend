@@ -10,10 +10,14 @@ import ContactState from "./context/contact/ContactState";
 import Home from "./components/pages/Home";
 import Login from "./components/auth/Login";
 import Navbar from "./components/layout/Navbar";
+import NotFound from "./components/NotFound";
 import React from "react";
 import Register from "./components/auth/Register";
+import setAuthToken from "./utils/SetAuthToken";
 
 const App = () => {
+  setAuthToken(localStorage.getItem("token"));
+
   return (
     <ContactState>
       <AlertState>
@@ -28,6 +32,7 @@ const App = () => {
                   <Route exact path="/about" component={About} />
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />
+                  <Route component={NotFound} />
                 </Switch>
               </div>
             </div>

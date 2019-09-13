@@ -1,9 +1,10 @@
-// import AuthContext from "../../context/auth/authContext";
-
 import React from "react";
+import AuthContext from "../../context/auth/authContext";
+import AlertContext from "../../context/alert/alertContext";
 
-const Login = () => {
-  // const authContext = React.useContext(AuthContext);
+const Login = props => {
+  const authContext = React.useContext(AuthContext);
+  const alertContext = React.useContext(AlertContext);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
@@ -15,6 +16,17 @@ const Login = () => {
     });
   };
 
+  React.useEffect(() => {
+    if (authContext.isAuthenticated) {
+      props.history.push("/");
+    }
+
+    if (authContext.error) {
+      alertContext.setAlert(authContext.error.msg, "danger");
+      authContext.clearErrors();
+    }
+  }, [alertContext, authContext, props.history]);
+
   const setUser = user => {
     const { email, password } = user;
     setEmail(email);
@@ -23,8 +35,7 @@ const Login = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const user = { email, password };
-    console.log(user);
+    authContext.login({ email, password });
   };
 
   return (

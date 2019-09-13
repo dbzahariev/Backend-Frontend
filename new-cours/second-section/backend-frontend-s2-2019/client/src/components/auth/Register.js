@@ -1,33 +1,25 @@
 import AuthContext from "../../context/auth/authContext";
-
 import AlertContext from "../../context/alert/alertContext";
 import React from "react";
 
-const Register = () => {
+const Register = props => {
   const authContext = React.useContext(AuthContext);
   const alertContext = React.useContext(AlertContext);
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confPassword, setConfPassword] = React.useState("");
-  const [disableBtnSuccess, setDisB] = React.useState(true);
 
   React.useEffect(() => {
+    if (authContext.isAuthenticated) {
+      props.history.push("/");
+    }
+
     if (authContext.error) {
       alertContext.setAlert(authContext.error.msg, "danger");
       authContext.clearErrors();
     }
-  }, [alertContext, authContext]);
-
-  React.useEffect(() => {
-    if (!password) {
-      setDisB(true);
-    } else if (password !== confPassword) {
-      setDisB(true);
-    } else {
-      setDisB(false);
-    }
-  }, [password, confPassword]);
+  }, [alertContext, authContext, props.history]);
 
   const onChange = e => {
     setUser({
@@ -87,12 +79,9 @@ const Register = () => {
           />
         </div>
         <input
-          disabled={disableBtnSuccess}
           type="submit"
           value="Register"
-          className={`btn btn-block ${
-            disableBtnSuccess ? "btn-is-disable" : "btn-primary"
-          }`}
+          className="btn btn-block btn-primary"
         ></input>
       </form>
     </div>

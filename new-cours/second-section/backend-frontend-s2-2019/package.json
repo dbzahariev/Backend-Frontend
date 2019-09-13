@@ -4,11 +4,13 @@
   "description": "Contact manager app",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "startserver": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "clientinstall": "npm install --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "beckendinstall": "npm install",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "npm run dev"
   },
   "keywords": [],
   "author": "",

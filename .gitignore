@@ -11,3 +11,6 @@ new-cours/second-section-contact-keeper/backend-frontend-s2-2019/client/.env.pro
 new-cours/second-section-contact-keeper/backend-frontend-s2-2019/client/npm-debug.log*
 new-cours/second-section-contact-keeper/backend-frontend-s2-2019/client/yarn-debug.log*
 new-cours/second-section-contact-keeper/backend-frontend-s2-2019/client/yarn-error.log*
+
+new-cours/second-section-contact-keeper/backend-frontend-s2-2019/package-lock.json
+new-cours/second-section-contact-keeper/backend-frontend-s2-2019/client/package-lock.json

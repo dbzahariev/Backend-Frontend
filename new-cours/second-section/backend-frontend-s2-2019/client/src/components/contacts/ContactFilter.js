@@ -6,16 +6,11 @@ const ContactFilter = () => {
   const text = React.useRef("");
 
   const onChange = e => {
-    clearFilter();
     if (text.current.value !== "") {
       filteredContacts(text.current.value);
     } else {
       clearFilter();
     }
-  };
-
-  const handleSubmit = () => {
-    filteredContacts(text);
   };
 
   return (
@@ -27,9 +22,6 @@ const ContactFilter = () => {
         id="text"
         onChange={onChange}
       />
-      <button className="btn btn-primary btn-block" onClick={handleSubmit}>
-        Send
-      </button>
     </React.Fragment>
   );
 };

@@ -42,7 +42,7 @@ const ContactFrom = () => {
     if (!current) contactContext.addContact({ name, email, phone, type });
     else
       contactContext.updateContact({
-        id: current.id,
+        id: current._id,
         name,
         email,
         phone,

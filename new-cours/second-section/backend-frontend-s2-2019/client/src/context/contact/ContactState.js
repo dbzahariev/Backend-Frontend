@@ -65,12 +65,36 @@ const ContactStates = props => {
     }
   };
 
+  // Update Contact
+  const updateContact = async contact => {
+    try {
+      const res = await axios.put(`/api/contacts/${contact.id}`, contact);
+      dispatch({
+        type: UPDATE_CONTACT,
+        payload: res.data
+      });
+    } catch (error) {
+      dispatch({
+        type: CONTACT_ERROR,
+        payload: error.response.errors[0]
+      });
+    }
+  };
+
   // Delete Contact
-  const deleteContact = contact => {
-    dispatch({
-      type: DELETE_CONTACT,
-      payload: contact
-    });
+  const deleteContact = async id => {
+    try {
+      await axios.delete(`/api/contacts/${id}`);
+      dispatch({
+        type: DELETE_CONTACT,
+        payload: id
+      });
+    } catch (error) {
+      dispatch({
+        type: CONTACT_ERROR,
+        payload: error.response.errors[0]
+      });
+    }
   };
 
   // Set current contact
@@ -85,14 +109,6 @@ const ContactStates = props => {
   const clearCurrent = () => {
     dispatch({
       type: CLEAR_CURRENT
-    });
-  };
-
-  // Update Contact
-  const updateContact = contact => {
-    dispatch({
-      type: UPDATE_CONTACT,
-      payload: contact
     });
   };
 

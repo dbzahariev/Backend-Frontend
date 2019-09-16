@@ -1,13 +1,13 @@
-backend-frontend-s2-2019/node_modules/
-backend-frontend-s2-2019/.vscode
+node_modules/
+.vscode
 
-backend-frontend-s2-2019/client/node_modules/
-backend-frontend-s2-2019/client/build/
-backend-frontend-s2-2019/client/.env.local
-backend-frontend-s2-2019/client/.env.development.local
-backend-frontend-s2-2019/client/.env.test.local
-backend-frontend-s2-2019/client/.env.production.local
+client/node_modules/
+client/build/
+client/.env.local
+client/.env.development.local
+client/.env.test.local
+client/.env.production.local
 
-backend-frontend-s2-2019/client/npm-debug.log*
-backend-frontend-s2-2019/client/yarn-debug.log*
-backend-frontend-s2-2019/client/yarn-error.log*
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*

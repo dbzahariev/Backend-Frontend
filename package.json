@@ -1,5 +1,5 @@
 {
-  "name": "backend-frontend-s2-2019",
+  "name": "backend-frontend",
   "version": "1.0.0",
   "description": "Contact manager app",
   "main": "server.js",
@@ -10,7 +10,9 @@
     "clientinstall": "npm install --prefix client",
     "beckendinstall": "npm install",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "web": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -27,5 +29,8 @@
   "devDependencies": {
     "concurrently": "^4.1.2",
     "nodemon": "^1.19.2"
+  },
+  "engines": {
+    "node": "^10.3.0"
   }
 }

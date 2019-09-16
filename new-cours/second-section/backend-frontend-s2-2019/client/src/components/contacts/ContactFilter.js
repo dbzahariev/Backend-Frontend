@@ -2,20 +2,20 @@ import ContactContext from "../../context/contact/contactContext";
 import React from "react";
 
 const ContactFilter = () => {
-  const contactContext = React.useContext(ContactContext);
+  const { clearFilter, filteredContacts } = React.useContext(ContactContext);
   const text = React.useRef("");
 
   const onChange = e => {
-    contactContext.clearFilter();
+    clearFilter();
     if (text.current.value !== "") {
-      contactContext.filteredContacts(text.current.value);
+      filteredContacts(text.current.value);
     } else {
-      contactContext.clearFilter();
+      clearFilter();
     }
   };
 
-  const handleSubmit = e => {
-    contactContext.filteredContacts(text);
+  const handleSubmit = () => {
+    filteredContacts(text);
   };
 
   return (

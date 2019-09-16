@@ -6,6 +6,9 @@ const setAuthToken = token => {
   } else {
     delete axios.defaults.headers.common["x-auth-token"];
   }
+  if (!axios.defaults.headers.common["Content-Type"]) {
+    axios.defaults.headers.common["Content-Type"] = "application/json";
+  }
 };
 
 export default setAuthToken;

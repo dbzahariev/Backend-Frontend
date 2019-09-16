@@ -1,13 +1,13 @@
-new-cours/backend-frontend-s2-2019/node_modules/
-new-cours/backend-frontend-s2-2019/.vscode
+backend-frontend-s2-2019/node_modules/
+backend-frontend-s2-2019/.vscode
 
-new-cours/backend-frontend-s2-2019/client/node_modules/
-new-cours/backend-frontend-s2-2019/client/build/
-new-cours/backend-frontend-s2-2019/client/.env.local
-new-cours/backend-frontend-s2-2019/client/.env.development.local
-new-cours/backend-frontend-s2-2019/client/.env.test.local
-new-cours/backend-frontend-s2-2019/client/.env.production.local
+backend-frontend-s2-2019/client/node_modules/
+backend-frontend-s2-2019/client/build/
+backend-frontend-s2-2019/client/.env.local
+backend-frontend-s2-2019/client/.env.development.local
+backend-frontend-s2-2019/client/.env.test.local
+backend-frontend-s2-2019/client/.env.production.local
 
-new-cours/backend-frontend-s2-2019/client/npm-debug.log*
-new-cours/backend-frontend-s2-2019/client/yarn-debug.log*
-new-cours/backend-frontend-s2-2019/client/yarn-error.log*
+backend-frontend-s2-2019/client/npm-debug.log*
+backend-frontend-s2-2019/client/yarn-debug.log*
+backend-frontend-s2-2019/client/yarn-error.log*

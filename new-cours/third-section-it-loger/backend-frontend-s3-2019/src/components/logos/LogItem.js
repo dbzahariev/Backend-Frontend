@@ -3,12 +3,6 @@ import PropTypes from "prop-types";
 import moment from "moment";
 
 const LogItem = ({ log }) => {
-  const normalDate = moment(
-    `${log.date.split("-")[2]}-${log.date.split("-")[0]}-${
-      log.date.split("-")[1]
-    }`
-  ).format("MMMM Do YYYY, h:mm:ss a");
-
   return (
     <li key={log.id} className="collection-item">
       <div>
@@ -28,7 +22,7 @@ const LogItem = ({ log }) => {
         <a href="#!" className="secondary-content">
           <i className="material-icons grey-text">delete</i>
         </a>{" "}
-        {normalDate}
+        {moment(log.date).format("MMMM Do YYYY, h:mm:ss a")}
       </div>
     </li>
   );

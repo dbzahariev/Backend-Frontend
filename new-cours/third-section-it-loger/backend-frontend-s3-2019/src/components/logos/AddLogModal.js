@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
+import * as logActions from "../../actions/logActions";
+import moment from "moment";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+// eslint-disable-next-line no-unused-vars
+import uuid from "uuid";
 
 const techsss = [
   {
@@ -19,9 +25,9 @@ const techsss = [
   }
 ];
 
-const AddLogModal = () => {
+const AddLogModal = ({ addLog }) => {
   const [message, setMessage] = useState("");
-  const [attention, setAttention] = useState(false);
+  const [authentication, setAuthentication] = useState(false);
   const [tech, setTech] = useState("");
 
   const foo = () => {
@@ -34,10 +40,25 @@ const AddLogModal = () => {
   };
 
   const onSubmit = () => {
-    if (message === "" || tech === "") {
-      M.toast({ html: "Please enter a message and tech" });
+    const log = {
+      // Uncomment next line if you like long Id's
+      // id: uuid.v4(),
+      authentication,
+      date: moment().unix(),
+      message,
+      tech
+    };
+    if (log.message === "" || log.tech === "") {
+      M.toast({ html: "Please enter a message and select a technic" });
     } else {
-      console.log({ message, attention, tech });
+      addLog(log);
+
+      M.toast({ html: `Log is added by ${log.tech}` });
+
+      setMessage("");
+      setTech("");
+      setAuthentication(false);
+      M.Modal.getInstance(document.getElementById("add-log-modal")).close();
     }
   };
 
@@ -80,9 +101,9 @@ const AddLogModal = () => {
                 <input
                   type="checkbox"
                   className="filled-in"
-                  checked={attention}
-                  value={attention}
-                  onChange={e => setAttention(!attention)}
+                  checked={authentication}
+                  value={authentication}
+                  onChange={e => setAuthentication(!authentication)}
                 />
                 <span>Needs Attention</span>
               </label>
@@ -94,7 +115,7 @@ const AddLogModal = () => {
         <a
           href="#!"
           onClick={onSubmit}
-          className="modal-close waves-effect blue waves-light btn"
+          className="waves-effect blue waves-light btn"
         >
           Enter
         </a>
@@ -103,6 +124,13 @@ const AddLogModal = () => {
   );
 };
 
+AddLogModal.prototype = {
+  addLog: PropTypes.func.isRequired
+};
+
 const modalStyle = { width: "75%", height: "75%" };
 
-export default AddLogModal;
+export default connect(
+  null,
+  logActions
+)(AddLogModal);

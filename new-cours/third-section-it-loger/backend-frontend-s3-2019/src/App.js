@@ -18,17 +18,19 @@ const App = () => {
     M.AutoInit();
   });
   return (
-    <Provider store={store}>
-      <SearchBar />
-      <div className="container">
-        <AddBtn />
-        <AddLogModal />
-        <EditLogModal />
-        <AddTechModal />
-        <TechListModal />
-        <Logs />
-      </div>
-    </Provider>
+    <div id="app">
+      <Provider store={store}>
+        <SearchBar />
+        <div className="container">
+          <AddBtn />
+          <AddLogModal />
+          <EditLogModal />
+          <AddTechModal />
+          <TechListModal />
+          <Logs />
+        </div>
+      </Provider>
+    </div>
   );
 };
 

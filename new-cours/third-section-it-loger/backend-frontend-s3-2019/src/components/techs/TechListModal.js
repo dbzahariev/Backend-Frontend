@@ -1,0 +1,37 @@
+import React, { useState, useEffect } from "react";
+import TechItem from "./TechItem";
+
+const TechListModal = () => {
+  const [techs, setTechs] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    getTechs();
+  }, []);
+
+  const getTechs = async () => {
+    setLoading(true);
+    const res = await fetch("/techs");
+    let data = await res.json();
+    if (!res.ok) {
+      data = [];
+    }
+
+    setTechs(data);
+    setLoading(false);
+  };
+
+  return (
+    <div id="tech-list-modal" className="modal">
+      <div className="modal-content">
+        <h4>Technical List</h4>
+        <ul className="collection">
+          {!loading &&
+            techs.map(tech => <TechItem key={tech.id} tech={tech} />)}
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+export default TechListModal;

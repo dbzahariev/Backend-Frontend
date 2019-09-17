@@ -4,21 +4,21 @@
       "id": 1,
       "message": "Changed Hard disk",
       "authentication": false,
-      "date": "03-02-2019",
+      "date": "2019-02-03T14:37:32.774Z",
       "tech": "Sam Smith"
     },
     {
       "id": 2,
       "message": "Workstation 007 not posting",
       "authentication": true,
-      "date": "03-02-2019",
+      "date": "2019-02-03T14:37:32.774Z",
       "tech": "Jhon Doe"
     },
     {
       "id": 3,
       "message": "Changed memory on workstation 050",
       "authentication": false,
-      "date": "03-02-2019",
+      "date": "2019-02-03T14:37:32.774Z",
       "tech": "Sara Wilson"
     }
   ],
